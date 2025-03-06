@@ -28,6 +28,35 @@ public class Traverse {
     v45.neighbors = new ArrayList<>(List.of(v23));
     v23.neighbors = new ArrayList<>(List.of());
     v67.neighbors = new ArrayList<>(List.of(v91));
+
+    System.out.println();
+    // Set<Vertex<Integer>> visited = new HashSet<>();
+    //before: dfs(v7, visited);
+    dfs(v7);
   }
+
+  public static <T> void dfs(Vertex<T> vertex) {
+    //before:
+    //var visited = new HashSet<Vertex<T>>();
+    //dfs(vertex, visited);
+
+    //after:
+    dfs(vertex, new HashSet<Vertex<T>>());
+  }
+
+  public static <T> void dfs(Vertex<T> vertex, Set<Vertex<T>> visited) {
+    if (vertex == null) return;
+    if(visited.contains(vertex)) return;
+
+    visited.add(vertex);
+    System.out.println(vertex.data);
+
+    if (vertex.neighbors == null) return;
+
+    for (var neighbor : vertex.neighbors) {
+      dfs(neighbor, visited);
+    }
+  }
+
 
 }
